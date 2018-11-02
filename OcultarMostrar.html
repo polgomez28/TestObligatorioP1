@@ -34,10 +34,152 @@ and open the template in the editor.
                 <a href="#">No recuerda usuario?</a>
             </form>
         </div>
-        <div id="mostrarForm">
+        <div class="contenedorOfertas">
+            <h2>Ofertas destacadas de la semana</h2>
+            <div class="contenedor">
+                <img src="img/hotel.png" alt="imagen hotel">
+                <div class="textoOferta">
+                    <h3>TimHotel Paris Berthier</h3>
+                    <img class="Estrellas" src="img/estrella.png" alt=""><img class="Estrellas" src="img/estrella.png" alt="">
+                    <p>París, a 2,4 km de: Basique du Sacré-Coeur</p><br>
+                    <p class="puntaje"><strong>7.4</strong></p>
+                    
+                </div>
+                <div class="botonesOferta">
+                    <input class="boton_Reserva" type="button" id="btnReservar" value="Reservar">
+                </div>
+            </div>
+            <div class="contenedor">
+                <img src="img/hotel.png" alt="imagen hotel">
+                <div class="textoOferta">
+                    <h3>TimHotel Paris Berthier</h3>
+                    <img class="Estrellas" src="img/estrella.png" alt=""><img class="Estrellas" src="img/estrella.png" alt="">
+                    <p>París, a 2,4 km de: Basique du Sacré-Coeur</p><br>
+                    <p class="puntaje"><strong>7.4</strong></p>
+                    
+                </div>
+                <div class="botonesOferta">
+                    <input class="boton_Reserva" type="button" id="btnReservar" value="Reservar">
+                </div>
+            </div>
+        </div>
+        <div class="crearOfertas">
+            <form>  
+                <fieldset>
+                    <legend>Crear Ofertas</legend>
+                    <p>
+                        Indicador de oferta: (autonumerado)
+                    </p>
+                    <p>
+                        Nombre hospedaje <input type="text" id="txtNombreHosp">
+                    </p>
+                    <p>
+                        Ubicación <input type="text" id="txtUbicacion">
+                    </p>
+                    <p>
+                        Imagen <input type="button" id="btnImagenHospedaje" value="Examinar">
+                    </p>
+                    <p>
+                        Tipo (hotel, hostel, casa o apartamento) <select name="tipoHospedaje">
+                            <option>Hotel</option>
+                            <option>Hostel</option>
+                            <option>Casa</option>
+                            <option>Apartamento</option>
+                        </select>
+                    </p>
+                    <p>
+                        Noches de alojamiento <input type="text" id="txtNoches">
+                    </p>
+                    <p>
+                        Precio <input type="text" id="txtPrecio">
+                    </p>
+                    <p>
+                        Fecha validez <input type="date" id="fechaValidez">
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+        <div class="crearUsuario">
             <form>
                 <fieldset>
-                    <legend>Prueba</legend>
+                    <legend>Crear Usuario</legend>
+                    <p>
+                        Nick :<input type="text" id="txtNick"/><img src="imagenes/help.png" title="Debe ser valor único" class="help">
+                    </p>
+                    <p>
+                        Nombre:<input type="text" id="txtNobreUsuario"/>
+                    </p>
+                    <p>
+                        Apellido: <input type="text" id="txtApellidoUsuario"/>
+                    </p>
+                    <p>
+                        Email : <input type="text" id="txtCorreousuario" value="prueba@gmail.com"/>
+                    </p>
+                    <p>
+                        Contraseña: <input type="password" name="pass" pattern="[A-Za-z0-9]{1,8}"/><img src="imagenes/help.png" title="//contraseña con numeros y letras" class="help">
+                    </p>
+                    <p>
+                        Repita contraseña: <input type="password" name="pass" pattern="[A-Za-z0-9]{1,8}"/>
+                    <p>
+                        Contraseña: <input type="password" name="pass" pattern="[A-Za-z0-9]{1,8}"/>
+                    </p>
+                        <br>
+                        <input type="button" id="btnContraseña" value="Enviar" />
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+        <div class="listadoOfertas">
+            <form>
+                <fieldset>
+                    <legend>Listado ofertas</legend>
+                    <table>
+                        <tbody><tr>
+                                <th class="lista"></th>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Ubicación</th>
+                                <th>Foto</th>
+                                <th>Tipo</th>
+                                <th>Precio</th>
+                                <th>Reservas</th>
+                            </tr>
+                            <tr class="par">
+                                <th class="user"></th>
+                                <td>AutoId</td>
+                                <td>La Celeste</td>
+                                <td>Colonia</td>
+                                <td><img src="img/colonia.jpg"></td>
+                                <td>Hotel</td>
+                                <td>$1200</td>
+                                <td>Ninguna</td>
+                                <td class="estado"></td>
+
+                            </tr>
+                            <tr>
+                                <th class="user"></th>
+                                <td>AutoId</td>
+                                <td>La Casona</td>
+                                <td>Rocha</td>
+                                <td><img src="img/colonia.jpg"></td>
+                                <td>Hostel</td>
+                                <td>$800</td>
+                                <td>2</td>
+                                <td class="estado"></td>
+
+                            </tr>
+                            <tr class="par">
+                                <th class="user"></th>
+                                <td>AutoId</td>
+                                <td>El fugaz</td>
+                                <td>Salto</td>
+                                <td><img src="img/colonia.jpg"></td>
+                                <td>Apartamento</td>
+                                <td>$750</td>
+                                <td>Ninguna</td>
+                                <td class="estado"></td>
+                            </tr>
+                        </tbody></table>
                 </fieldset>
             </form>
         </div>

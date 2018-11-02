@@ -1,42 +1,29 @@
 $(document).ready(iniciar);
 function iniciar(){
-    $("#logIn").click(mostrarF);
-    $("#ocultar").click(ocultarWeb);
-    $("#mostrar").click(mostrarWeb);
-    $("#btnLogin").click(usuarioValido);
+    $("#logIn").click(mostrarLogin);
+    $("#mostrar").click(mostrarTodo);
+    $("#btnLogin").click(validarUsuario);
+    //$(".contenedor").hide();
 }
-var usuarios = ["polg"];
-var contraseña = ["1234"];
+var usuarios = ["polg","esteban"];
+var contraseña = ["1234","12345"];
+var roles = ["Registrado","Admin"];
 var login;
-function mostrarF(){
-    $("#prueba").show(1000);
-}
-function ocultarF(){
-    $("#prueba").hide(1000);
-}
-function ocultarLogin(){
-    $("#loginWeb").hide(10000);
-}
-function mostrarWeb(){
-    $("#mostrarForm").show(500);
-}
-function ocultarWeb(){
-    $("#mostrarForm").hide(500);
-}
-function usuarioValido(){
+var rol;
+
+// Función para validar contraseña y usuario
+function validarUsuario(){
     login = false;
     var userNew = $("#txtUser").val();
     var password = $("#txtPassword").val();
     login = buscarUser(userNew,password);
     if (login) {
         alert("Acceso concedido!");
-        ocultarF();
-        mostrarWeb();
     }else {
         alert("Acceso denegado!");
     }
-
 }
+//busca usuario y contraseña en sus respectivos arrays  devuelve true al procedimiento que la llamo.
 function buscarUser(userNew,password){
     for (i = 0; i <= usuarios.length-1; i++) {
         salir = false;
@@ -61,4 +48,20 @@ function buscarUser(userNew,password){
             return false;
         }
         }
+}
+
+//funciones para ocultar y mostrar contenedores
+function mostrarLogin(){
+    $("#contenedorOfertas").hide();
+    $("#crearOfertas").hide();
+    $("#crearUsuario").hide();
+    $("#listadoOfertas").hide();
+    $(".login-box").show();
+}
+function mostrarTodo(){
+    $("#contenedorOfertas").show();
+    $("#crearOfertas").show();
+    $("#crearUsuario").show();
+    $("#listadoOfertas").show();
+    $(".login-box").hide();
 }
