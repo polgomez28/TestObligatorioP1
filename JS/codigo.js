@@ -3,6 +3,7 @@ function iniciar(){
     $("#logIn").click(mostrarLogin);
     $("#mostrar").click(mostrarTodo);
     $("#btnLogin").click(validarUsuario);
+    cargarOfertas();
     //$(".contenedor").hide();
 }
 var usuarios = ["polg","esteban"];
@@ -10,7 +11,8 @@ var contraseña = ["1234","12345"];
 var roles = ["Registrado","Admin"];
 var login;
 var rol;
-
+var ofertas = {"AutoId":1,"Hospedaje":"La posada","Ubicacion":"Maldonado"
+                ,"Tipo":"Hotel","Precio":800,"FinValidez":"20/02/2019"};
 // Función para validar contraseña y usuario
 function validarUsuario(){
     login = false;
@@ -64,4 +66,14 @@ function mostrarTodo(){
     $("#crearUsuario").show();
     $("#listadoOfertas").show();
     $(".login-box").hide();
+}
+//Funciones para guardar en arrays
+function cargarOfertas(){
+    for (var clave in ofertas) {
+        masofertas = "<th>" + masofertas + clave + " : " + ofertas[clave] ;
+    }
+    $("#masOfertas").html(masofertas);
+}
+function favorita(){
+    
 }
