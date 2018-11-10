@@ -14,12 +14,12 @@ var login;
 var rol;
 
 
-var ofertas = [{"Id": 1, "Hospedaje": "La posada", "Ubicacion": "Maldonado"
-        , "Tipo": "Hotel", "Precio": 800, "FinValidez": "20/02/2019"},
-    {"Id": 2, "Hospedaje": "Las rosas", "Ubicacion": "Florida"
-        , "Tipo": "Hotel", "Precio": 1200, "FinValidez": "20/02/2019"},
-    {"Id": 3, "Hospedaje": "El Ciclon", "Ubicacion": "Durazno"
-        , "Tipo": "Hostel", "Precio": 500, "FinValidez": "12/03/2019"}];
+var ofertas = [{"Id":1, "Nombre":"La posada", "Ubicacion":"Maldonado"
+        , "Tipo":"Hotel", "Precio":800, "FinValidez":"20/02/2019"},
+    {"Id":2, "Nombre":"Las rosas", "Ubicacion":"Florida"
+        , "Tipo":"Hotel", "Precio":1200, "FinValidez":"20/02/2019"},
+    {"Id":3, "Nombre":"El Ciclon", "Ubicacion":"Durazno"
+        , "Tipo":"Hostel", "Precio":500, "FinValidez":"12/03/2019"}];
 
 
 var hospedajes = [{"tipo":1, "nombre":"Hotel"},
@@ -34,14 +34,14 @@ function autoIdOfertas(oferta){
     if (oferta) {
         for (pos = 0; pos <= ofertas.length-1; pos++) {
         tmpOfertas = ofertas[pos];
-        if (tmpOfertas[Id] > nuevoId) {
-            nuevoId = tmpOfertas[id];
+        if (tmpOfertas["Id"] > parseInt(nuevoId)) {
+            nuevoId = tmpOfertas["Id"];
         }
     }
     }else {
         // código para autonumerar id reservas
     }
-    nuevoId = nuevoId + 1;
+    nuevoId = (nuevoId + 1);
     return nuevoId;
 }
 // Función para validar contraseña y usuario
@@ -110,12 +110,9 @@ function mostrarTodo(){
 }
 //Funciones para guardar en arrays
 function cargarOfertas(){
-    var autoId = 0;
-    var existe = true;
-    /*
-    var tmpofertas;
+    var autoId;
     var existe = false;
-    var tmpofertas = {};
+    var tmpoferta = {};
     var nombreHosp = $("#txtNombreHosp").val();
     var ubicacion = $("#txtUbicacion").val();
     var tipoHosp = $("#hosTipo").val();
@@ -125,12 +122,25 @@ function cargarOfertas(){
         existe = buscarOferta(nombreHosp);
         if (existe) {
             autoId = autoIdOfertas(existe);
-            alert(autoId);
+            tmpoferta["Id"] = autoId;
+            tmpoferta["Nombre"] = nombreHosp;
+            tmpoferta["Ubicacion"] = ubicacion;
+            tmpoferta["Tipo"] = tipoHosp;
+            tmpoferta["Precio"] = precioOferta;
+            tmpoferta["FinValidez"] = fechaVal;
+            ofertas[ofertas.length] = tmpoferta;
+            $("#txtNombreHosp").val("");
+            $("#txtUbicacion").val("");
+            $("#hosTipo").val(1);
+            $("#txtPrecio").val(0);
+            $("#fechaValidez").val("");
+            $("#respCreaOferta").html("Oferta cargada correctamente!");
+        }else {
+            $("#respCreaOferta").html("Precio debe ser valor numérico");
+            $("#txtPrecio").val(0);
         }
+
     }
-    */
-   autoId = autoIdOfertas(existe);
-            alert(autoId);
 }
 function buscarOferta(nombreHosp){
     var tmphospedaje;
