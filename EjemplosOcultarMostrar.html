@@ -7,6 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <script src="JS/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="JS/codigo.js" type="text/javascript"></script>
         <script src="JS/OcultarMostrar.js" type="text/javascript"></script>
         <link href="CSS/OcultarMostrar.css" rel="stylesheet" type="text/css"/>
         <title>Ocultar y mostrar</title>
@@ -34,7 +35,7 @@ and open the template in the editor.
                     <fieldset>
                         <legend>Crear Ofertas</legend>
                         <p>
-                            Indicador de oferta: (autonumerado)
+                            Indicador de oferta: <p id="idOfertaForm"></p>
                         </p>
                         <p>
                             Nombre hospedaje <input type="text" id="txtNombreHosp">
@@ -43,25 +44,16 @@ and open the template in the editor.
                             Ubicación <input type="text" id="txtUbicacion">
                         </p>
                         <p>
-                            Imagen <input type="button" id="btnImagenHospedaje" value="Examinar">
-                        </p>
-                        <p>
-                            Tipo (hotel, hostel, casa o apartamento) <select name="tipoHospedaje">
-                                <option>Hotel</option>
-                                <option>Hostel</option>
-                                <option>Casa</option>
-                                <option>Apartamento</option>
-                            </select>
-                        </p>
-                        <p>
-                            Noches de alojamiento <input type="text" id="txtNoches">
+                            Tipo de hospedaje <select id="hosTipo"></select>
                         </p>
                         <p>
                             Precio <input type="text" id="txtPrecio">
                         </p>
                         <p>
-                            Fecha validez <input type="date" id="fechaValidez">
+                            Fecha validez <input type="text" id="fechaValidez" value="dd / mm / aaaa">
                         </p>
+                        <input type="button" id="btnCrearOferta" value="Crear">
+                        <div id="respCreaOferta"></div>
                     </fieldset>
                 </form>
             </div>
@@ -335,7 +327,7 @@ and open the template in the editor.
                 <br>
                 <table>
                             <tbody><tr>
-                                <th class="lista"></th>
+                                <th></th>
                                 <th>Id oferta</th>
                                 <th>Hospedaje</th>
                                 <th>Ubicación</th>
@@ -346,40 +338,19 @@ and open the template in the editor.
                                 <th>Fin validez</th>
                             </tr>
                             <tr>
-                                <th></th>
-                                <td>AutoId</td>
-                                <td>La Boca</td>
-                                <td>Florida</td>
-                                <td><img src="imagenes/colonia.jpg"></td>
-                                <td>Apartamento</td>
-                                <td>$1200</td>
-                                <td>Ninguna</td>
-                                <td><input type="date" id="dateOferta"></td>
+                                <td id="masOfertas"></td>
                             </tr>
                             <tr>
                                 <th></th>
-                                <td>AutoId</td>
-                                <td>La Redención</td>
-                                <td>Punta del Este</td>
-                                <td><img src="imagenes/colonia.jpg"></td>
-                                <td>Hotel</td>
-                                <td>$800</td>
-                                <td>2</td>
-                                <td><input type="date" id="dateOferta"></td>
+                                
                             </tr>
                             <tr>
                                 <th></th>
-                                <td>AutoId</td>
-                                <td>La proa</td>
-                                <td>Mercedes</td>
-                                <td><img src="imagenes/colonia.jpg"></td>
-                                <td>Hotel</td>
-                                <td>$750</td>
-                                <td>Ninguna</td>
-                                <td><input type="date" id="dateOferta"></td>
+                                
                             </tr>
                         </tbody>
                 </table>
+                <input type="button" id="btnMostrarOfertas" value="Mostrar">
             </fieldset>
         </div>
         <div class="opcion2">
