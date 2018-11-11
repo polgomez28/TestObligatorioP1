@@ -2,61 +2,85 @@ $(document).ready(iniciar);
 function iniciar(){
     $("#logIn").click(mostrarLogin);
     $("#mostrar").click(mostrarTodo);
-    $("#btnLogin").click(validarUsuario);
-    $("#btnCrearOferta").click(cargarOfertas);
+    $("#btnAltaUsuario").click(validarUsuario);
+    $("#btnCrearOferta").click(cargarOfertas); // (PRONTA) llama a funcion que valida oferta y la da de alta en array ofertas
     $("#hosTipo").html(cargoTiposHospedajes());
     //$(".contenedor").hide();
 }
-var usuarios = ["polg","esteban"];
-var contraseña = ["1234","12345"];
-var roles = ["Registrado","Admin"];
-var login;
-var rol;
-
-
+/* Definimos las variables globales 
+ * y los arrays globales.
+ */
+var usuarios = [{"Nombre":"polg", "Correo":"polg28@gmail.com", "Clave":"polg28", "Estado":true, "Rol":"administrador"}
+            ,{"Nombre":"Necuse", "Correo":"necuse@gmail.com", "Clave":"necuse", "Estado":true, "Rol":"administrador"}
+            ,{"Nombre":"charly", "Correo":"charly@gmail.com", "Clave":"charly", "Estado":true, "Rol":"registrado"}
+            ,{"Nombre":"jose", "Correo":"jose@adinet.com.uy", "Clave":"jose", "Estado":false, "Rol":"pendiente"}];
+var reservas = [{}];
 var ofertas = [{"Id":1, "Nombre":"La posada", "Ubicacion":"Maldonado"
         , "Tipo":"Hotel", "Precio":800, "FinValidez":"20/02/2019"},
     {"Id":2, "Nombre":"Las rosas", "Ubicacion":"Florida"
         , "Tipo":"Hotel", "Precio":1200, "FinValidez":"20/02/2019"},
     {"Id":3, "Nombre":"El Ciclon", "Ubicacion":"Durazno"
         , "Tipo":"Hostel", "Precio":500, "FinValidez":"12/03/2019"}];
-
-
 var hospedajes = [{"tipo":1, "nombre":"Hotel"},
                   {"tipo":2, "nombre":"Hostel"},
                   {"tipo":3, "nombre":"Casa"},
                   {"tipo":4, "nombre":"Apartamento"}];
-
+var login;
+var rol;
 //Funcion para autonumerado de ID en ofertas o reservas
-function autoIdOfertas(oferta){
-    var tmpOfertas;
+function autoId(tipo){
+    var tmp;
     var nuevoId = 0;
-    if (oferta) {
+    if (tipo === "oferta") {
         for (pos = 0; pos <= ofertas.length-1; pos++) {
-        tmpOfertas = ofertas[pos];
-        if (tmpOfertas["Id"] > parseInt(nuevoId)) {
-            nuevoId = tmpOfertas["Id"];
+        tmp = ofertas[pos];
+        if (tmp["Id"] > parseInt(nuevoId)) {
+            nuevoId = tmp["Id"];
         }
     }
     }else {
-        // código para autonumerar id reservas
+        if (tipo === "reserva") {
+            for (pos = 0; pos <= reservas.length-1; pos++) {
+        tmp = reservas[pos];
+        if (tmp["Id"] > parseInt(nuevoId)) {
+            nuevoId = tmp["Id"];
+        }
+    }
+        }
     }
     nuevoId = (nuevoId + 1);
     return nuevoId;
 }
 // Función para validar contraseña y usuario
-function validarUsuario(){
+function validarUsuario() {
+    var tmpUsuario = {};
     login = false;
-    var userNew = $("#txtUser").val();
-    var password = $("#txtPassword").val();
-    login = buscarUser(userNew,password);
-    if (login) {
-        alert("Acceso concedido!");
+    var tipo = "usuario";
+    var nombreUsuario = $("#txtNombreUsuario").val();
+    var correoUsuario = $("#txtCorreousuario").val();
+    var contraseña = $("#txtContraseña").val();
+    var contraseñaVal = $("#txtContraseña2").val();
+    if (contraseña === contraseñaVal) {
+        login = buscar(nombreUsuario,tipo); // Llamada a funcion buscar para ver si ya existe usuario
+        if (!login) {
+            tmpUsuario["Nombre"] = nombreUsuario;
+            tmpUsuario["Correo"] = correoUsuario;
+            tmpUsuario["Clave"] = contraseña;
+            tmpUsuario["Estado"] = false;
+            tmpUsuario["Rol"] = "pendiente";
+            usuarios[usuarios.length] = tmpUsuario;
+            $("#respSolicitudUsuario").html("Usuario dado de alta correctamente!");
+        } else {
+            $("#respSolicitudUsuario").html("Error, usuario ya existe");
+        }
     }else {
-        alert("Acceso denegado!");
+        $("#respSolicitudUsuario").html("Error, la contraseña no coincide");
     }
+
 }
-//busca usuario y contraseña en sus respectivos arrays  devuelve true al procedimiento que la llamo.
+//
+// FUNCION SUSTITUIDA POR (function buscar)
+/*
 function buscarUser(userNew,password){
     for (i = 0; i <= usuarios.length-1; i++) {
         salir = false;
@@ -81,7 +105,7 @@ function buscarUser(userNew,password){
             return false;
         }
         }
-}
+}*/
 //Función para cargar las combox de tipos hospedajes
 function cargoTiposHospedajes(){
 	var tmpHospedaje={}, opciones="";
@@ -108,32 +132,34 @@ function mostrarTodo(){
     $("#listadoOfertas").show();
     $(".login-box").hide();
 }
-//Funciones para guardar en arrays
+//Funciones que valida que no exista oferta a dar de alta y la agrega al array ofertas
 function cargarOfertas(){
+    var tipo = "oferta";
     var autoId;
-    var existe = false;
+    var existe;
     var tmpoferta = {};
     var nombreHosp = $("#txtNombreHosp").val();
     var ubicacion = $("#txtUbicacion").val();
     var tipoHosp = $("#hosTipo").val();
-    var precioOferta = $("#txtPrecio").val();
+    var precioOferta = parseInt($("#txtPrecio").val());
     var fechaVal = $("#fechaValidez").val();
-    if (precioOferta) {
-        existe = buscarOferta(nombreHosp);
-        if (existe) {
-            autoId = autoIdOfertas(existe);
+    if (!isNaN(precioOferta)) {
+        existe = buscar(nombreHosp,tipo);  //llamamos a funcion para ver si oferta ya existe
+        if (!existe) {
+            autoId = autoId(tipo); //llamada a funcion para autonumerar oferta nueva
+            $("#idOfertaForm").html(autoId);
             tmpoferta["Id"] = autoId;
             tmpoferta["Nombre"] = nombreHosp;
             tmpoferta["Ubicacion"] = ubicacion;
             tmpoferta["Tipo"] = tipoHosp;
             tmpoferta["Precio"] = precioOferta;
             tmpoferta["FinValidez"] = fechaVal;
-            ofertas[ofertas.length] = tmpoferta;
+            ofertas[ofertas.length] = tmpoferta;    //Se da de alta oferta nueva en array
             $("#txtNombreHosp").val("");
             $("#txtUbicacion").val("");
             $("#hosTipo").val(1);
             $("#txtPrecio").val(0);
-            $("#fechaValidez").val("");
+            $("#fechaValidez").val("dd / mm / aaaa");
             $("#respCreaOferta").html("Oferta cargada correctamente!");
         }else {
             $("#respCreaOferta").html("Precio debe ser valor numérico");
@@ -142,13 +168,24 @@ function cargarOfertas(){
 
     }
 }
-function buscarOferta(nombreHosp){
-    var tmphospedaje;
+function buscar(nombre, tipo){
+    var tmp;
     var existe = false;
-    for (pos = 0; pos <= ofertas.length-1; pos++) {
-        tmphospedaje = ofertas[pos];
-        if (tmphospedaje[Hospedaje] == nombreHosp) {
+    if (tipo === "oferta") {
+        for (pos = 0; pos <= ofertas.length-1; pos++) {
+        tmp = ofertas[pos];
+        if (tmp["Nombre"] === nombre) {
             existe = true;
+        }
+    }
+    }else {
+        if (tipo === "usuario") {
+            for (pos = 0; pos <= usuarios.length-1; pos++) {
+        tmp = usuarios[pos];
+        if (tmp["Nombre"] === nombre) {
+            existe = true;
+        }
+    }
         }
     }
     return existe;

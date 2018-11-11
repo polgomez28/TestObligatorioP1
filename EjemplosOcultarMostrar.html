@@ -35,7 +35,7 @@ and open the template in the editor.
                     <fieldset>
                         <legend>Crear Ofertas</legend>
                         <p>
-                            Indicador de oferta: <p id="idOfertaForm"></p>
+                            Id: <label id="idOfertaForm"></label>
                         </p>
                         <p>
                             Nombre hospedaje <input type="text" id="txtNombreHosp">
@@ -53,6 +53,7 @@ and open the template in the editor.
                             Fecha validez <input type="text" id="fechaValidez" value="dd / mm / aaaa">
                         </p>
                         <input type="button" id="btnCrearOferta" value="Crear">
+                        <br>
                         <div id="respCreaOferta"></div>
                     </fieldset>
                 </form>
@@ -445,30 +446,23 @@ and open the template in the editor.
                     <fieldset>
                         <legend>Solicitar Usuario</legend>
                         <p>
-                            Nick :<input type="text" id="txtNick"/><img src="imagenes/help.png" title="Debe ser valor único" class="help">
+                            Nombre:<input type="text" id="txtNombreUsuario"/>
                         </p>
                         <p>
-                            Nombre:<input type="text" id="txtNobreUsuario"/>
+                            Email :<input type="text" id="txtCorreousuario"/>
                         </p>
                         <p>
-                            Apellido: <input type="text" id="txtApellidoUsuario"/>
+                            Contraseña: <input type="password" name="pass" pattern="[A-Za-z0-9]{1,8}" id="txtContraseña"/><img src="img/help.png" title="//contraseña con numeros y letras" class="help">
                         </p>
                         <p>
-                            Email : <input type="text" id="txtCorreousuario" value="prueba@gmail.com"/>
-                        </p>
-                        <p>
-                            Contraseña: <input type="password" name="pass" pattern="[A-Za-z0-9]{1,8}"/><img src="imagenes/help.png" title="//contraseña con numeros y letras" class="help">
-                        </p>
-                        <p>
-                            Repita contraseña: <input type="password" name="pass" pattern="[A-Za-z0-9]{1,8}"/>
-                        <p>
-                            Contraseña: <input type="password" name="pass" pattern="[A-Za-z0-9]{1,8}"/>
-                        </p>
+                            Repita contraseña: <input type="password" name="pass" pattern="[A-Za-z0-9]{1,8}" id="txtContraseña2"/>
                         </p>
                         <p>
                             <br>
-                             <input type="button" id="btnContraseña" value="Enviar" />
+                             <input type="button" id="btnAltaUsuario" value="Enviar" />
                         </p>
+                        <br>
+                        <div id="respSolicitudUsuario"></div>
                     </fieldset>
                 </form>
             </div>
