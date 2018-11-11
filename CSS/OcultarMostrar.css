@@ -7,12 +7,12 @@ body{
 legend{
     color: #006505;
 }
-table form{
+table {
   font: .9em cursive, Helvetica, sans-serif;
-  border: 1px solid #333;
   border-collapse: collapse;
   text-align: center;
 }
+
 /*
 Estilos para ocultar las clases poción1 y opción2
 */
@@ -25,7 +25,9 @@ Estilos para ocultar las clases poción1 y opción2
 /*
 Estilos para dar formato a clases del html
 */
-
+.lista{
+    font: .20em cursive, Helvetica, sans-serif;
+}
 /*
 Estilos para id del html
 */

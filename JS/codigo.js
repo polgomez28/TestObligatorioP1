@@ -5,6 +5,7 @@ function iniciar(){
     $("#btnAltaUsuario").click(validarUsuario);
     $("#btnCrearOferta").click(cargarOfertas); // (PRONTA) llama a funcion que valida oferta y la da de alta en array ofertas
     $("#hosTipo").html(cargoTiposHospedajes());
+    registroUsuarios();
     //$(".contenedor").hide();
 }
 /* Definimos las variables globales 
@@ -25,8 +26,7 @@ var hospedajes = [{"tipo":1, "nombre":"Hotel"},
                   {"tipo":2, "nombre":"Hostel"},
                   {"tipo":3, "nombre":"Casa"},
                   {"tipo":4, "nombre":"Apartamento"}];
-var login;
-var rol;
+
 //Funcion para autonumerado de ID en ofertas o reservas
 function autoId(tipo){
     var tmp;
@@ -79,35 +79,26 @@ function validarUsuario() {
 
 }
 //
-// FUNCION SUSTITUIDA POR (function buscar)
-/*
-function buscarUser(userNew,password){
-    for (i = 0; i <= usuarios.length-1; i++) {
-        salir = false;
-        indice = 0;
-        while(!salir && indice <= usuarios.length-1){
-            if (usuarios[i] == userNew) {
-                salir = true;
-            }else {
-                indice++;
-            }
-        }
-        if (salir) {
-            for (pos = 0; pos <= contraseña.length-1; pos++) {
-                if (password == contraseña[i]) {
-                    return true;
-                }else {
-                    return false;
-                }
 
-            }
-        }else {
-            return false;
-        }
-        }
-}*/
+function registroUsuarios(){
+    var listado = "", tmpUsuario = {}, estados;
+    var pos;
+    for (pos = 0; pos <= usuarios.length - 1; pos++) {
+        tmpUsuario = usuarios[pos];
+        listado = listado + "<tr>";
+        listado = listado + "<td>" + tmpUsuario["Nombre"] + "</td>";
+        estados = tmpUsuario["Estado"];
+        listado = listado + "<td>" + estados + "</td>";
+        listado = listado + "<td>" + tmpUsuario["Correo"] + "</td>";
+        listado = listado + "<td>" + "<input type='button' value='Editar' id='btnEditarRegUsu'>" + "</td>";
+        listado = listado + "</tr>";
+    }
+    $("#solicitudRegistro").html(listado);
+}
+
 //Función para cargar las combox de tipos hospedajes
 function cargoTiposHospedajes(){
+    var pos;
 	var tmpHospedaje={}, opciones="";
 	for(pos=0; pos<=hospedajes.length-1; pos++){
 		tmpHospedaje = hospedajes[pos];
