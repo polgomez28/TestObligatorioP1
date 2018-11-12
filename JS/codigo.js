@@ -5,16 +5,17 @@ function iniciar(){
     $("#btnAltaUsuario").click(validarUsuario);
     $("#btnCrearOferta").click(cargarOfertas); // (PRONTA) llama a funcion que valida oferta y la da de alta en array ofertas
     $("#hosTipo").html(cargoTiposHospedajes());
-    registroUsuarios();
+    $("#btnSolicitudRegistro").click(registroUsuarios);
+    
     //$(".contenedor").hide();
 }
 /* Definimos las variables globales 
  * y los arrays globales.
  */
-var usuarios = [{"Nombre":"polg", "Correo":"polg28@gmail.com", "Clave":"polg28", "Estado":true, "Rol":"administrador"}
-            ,{"Nombre":"Necuse", "Correo":"necuse@gmail.com", "Clave":"necuse", "Estado":true, "Rol":"administrador"}
-            ,{"Nombre":"charly", "Correo":"charly@gmail.com", "Clave":"charly", "Estado":true, "Rol":"registrado"}
-            ,{"Nombre":"jose", "Correo":"jose@adinet.com.uy", "Clave":"jose", "Estado":false, "Rol":"pendiente"}];
+var usuarios = [{"Nombre":"polg", "Correo":"polg28@gmail.com", "Clave":"polg28", "Estado":"Habilitado", "Rol":"administrador"}
+            ,{"Nombre":"Necuse", "Correo":"necuse@gmail.com", "Clave":"necuse", "Estado":"Pendiente", "Rol":"administrador"}
+            ,{"Nombre":"charly", "Correo":"charly@gmail.com", "Clave":"charly", "Estado":"Habilitado", "Rol":"registrado"}
+            ,{"Nombre":"jose", "Correo":"jose@adinet.com.uy", "Clave":"jose", "Estado":"Pendiente", "Rol":"pendiente"}];
 var reservas = [{}];
 var ofertas = [{"Id":1, "Nombre":"La posada", "Ubicacion":"Maldonado"
         , "Tipo":"Hotel", "Precio":800, "FinValidez":"20/02/2019"},
@@ -79,18 +80,20 @@ function validarUsuario() {
 
 }
 //
-
+function generadorId(){
+    
+}
 function registroUsuarios(){
     var listado = "", tmpUsuario = {}, estados;
     var pos;
-    for (pos = 0; pos <= usuarios.length - 1; pos++) {
+    for (pos = 0; pos <= usuarios.length-1; pos++) {
         tmpUsuario = usuarios[pos];
         listado = listado + "<tr>";
         listado = listado + "<td>" + tmpUsuario["Nombre"] + "</td>";
         estados = tmpUsuario["Estado"];
         listado = listado + "<td>" + estados + "</td>";
         listado = listado + "<td>" + tmpUsuario["Correo"] + "</td>";
-        listado = listado + "<td>" + "<input type='button' value='Editar' id='btnEditarRegUsu'>" + "</td>";
+        listado = listado + "<td>" + "<input type='button' value='Editar'" +  + "</td>";
         listado = listado + "</tr>";
     }
     $("#solicitudRegistro").html(listado);
